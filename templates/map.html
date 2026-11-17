@@ -1,0 +1,61 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sector Map | Hollo OS{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+    <h2>Underground Sector Map</h2>
+    <p>Select a sector to view its current conditions.</p>
+</section>
+
+<section class="map-layout">
+
+    <div class="sector-map">
+        <button class="sector safe-sector" data-sector="A">
+            Sector A
+        </button>
+
+        <button class="sector safe-sector" data-sector="B">
+            Sector B
+        </button>
+
+        <button class="sector warning-sector" data-sector="C">
+            Sector C
+        </button>
+
+        <button class="sector safe-sector" data-sector="D">
+            Sector D
+        </button>
+
+        <button class="sector danger-sector" data-sector="E">
+            Sector E
+        </button>
+
+        <button class="sector unknown-sector" data-sector="F">
+            Sector F
+        </button>
+    </div>
+
+    <div class="sector-details">
+        <h3 id="sector-name">Select a Sector</h3>
+        <p id="sector-status">Click a sector to see its status.</p>
+        <p id="sector-power"></p>
+        <p id="sector-water"></p>
+        <p id="sector-alert"></p>
+    </div>
+
+</section>
+
+<div class="map-legend">
+    <span>🟢 Safe</span>
+    <span>🟠 Warning</span>
+    <span>🔴 Hazard</span>
+    <span>⚪ Unknown</span>
+</div>
+
+<script src="{% static 'js/map.js' %}"></script>
+
+{% endblock %}
