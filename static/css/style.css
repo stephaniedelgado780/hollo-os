@@ -263,3 +263,72 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Community Hazard Reports */
+
+.reports-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.report-card,
+.recent-reports {
+    background-color: #1d2d37;
+    border: 1px solid #39505d;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.report-card h3,
+.recent-reports h3 {
+    color: #83d6b4;
+}
+
+#report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#report-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#report-form select,
+#report-form textarea {
+    background-color: #101820;
+    color: white;
+    border: 1px solid #39505d;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 15px;
+    width: 100%;
+}
+
+.report-item {
+    background-color: #22343e;
+    border-left: 4px solid #f3bd67;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.report-item h4 {
+    margin-top: 0;
+    color: #e8edf2;
+}
+
+.report-item p {
+    color: #a8b7c0;
+    font-size: 14px;
+}
+
+@media (max-width: 750px) {
+    .reports-layout {
+        grid-template-columns: 1fr;
+    }
+}

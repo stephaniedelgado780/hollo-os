@@ -38,4 +38,10 @@ urlpatterns = [
         TemplateView.as_view(template_name="checkin.html"),
         name="checkin"
     ),
+
+    path(
+        "reports/",
+        TemplateView.as_view(template_name="reports.html"),
+        name="reports"
+    ),
 ]
