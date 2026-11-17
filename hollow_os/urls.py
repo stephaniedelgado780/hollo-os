@@ -32,4 +32,10 @@ urlpatterns = [
         TemplateView.as_view(template_name="map.html"),
         name="map"
     ),
+
+    path(
+        "checkin/",
+        TemplateView.as_view(template_name="checkin.html"),
+        name="checkin"
+    ),
 ]

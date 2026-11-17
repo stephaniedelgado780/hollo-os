@@ -179,3 +179,87 @@ body {
         font-size: 14px;
     }
 }
+
+
+/* Daily Check-In Page */
+
+.checkin-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.checkin-card,
+.checkin-info {
+    background-color: #1d2d37;
+    border: 1px solid #39505d;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.checkin-card h3,
+.checkin-info h3 {
+    color: #83d6b4;
+}
+
+#checkin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#checkin-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#checkin-form select,
+#checkin-form textarea {
+    background-color: #101820;
+    color: white;
+    border: 1px solid #39505d;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 15px;
+    width: 100%;
+}
+
+.submit-btn {
+    margin-top: 15px;
+    background-color: #83d6b4;
+    color: #101820;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #a2efd0;
+}
+
+#checkin-message {
+    color: #83d6b4;
+    margin-top: 15px;
+}
+
+.schedule-item {
+    background-color: #22343e;
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+.schedule-note {
+    color: #a8b7c0;
+    font-size: 14px;
+}
+
+@media (max-width: 750px) {
+    .checkin-layout {
+        grid-template-columns: 1fr;
+    }
+}
