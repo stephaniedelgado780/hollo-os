@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Hollo OS{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+    <h2>City Overview</h2>
+    <p>Monitor environmental conditions across the Hollow.</p>
+</section>
+
+<section class="stats">
+
+    <div class="stat-card">
+        <h3>Air Quality</h3>
+        <p class="safe">GOOD</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Water Quality</h3>
+        <p class="warning">WARNING</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Power Supply</h3>
+        <p>85%</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Temperature</h3>
+        <p>72°F</p>
+    </div>
+
+</section>
+
+<section class="alerts">
+    <h2>Active Alerts</h2>
+
+    <div class="alert-card">
+        <h3>Sector C — Water Warning</h3>
+        <p>Possible contamination reported by residents.</p>
+    </div>
+</section>
+
+{% endblock %}
