@@ -1,0 +1,99 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Daily Check-In | Hollo OS{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+    <h2>Daily Community Check-In</h2>
+    <p>
+        Help keep your community safe by reporting your
+        current conditions.
+    </p>
+</section>
+
+<section class="checkin-layout">
+
+    <div class="checkin-card">
+        <h3>Submit Your Check-In</h3>
+
+        <form id="checkin-form">
+
+            <label for="sector">Your Sector</label>
+            <select id="sector" name="sector" required>
+                <option value="">Select your sector</option>
+                <option value="A">Sector A</option>
+                <option value="B">Sector B</option>
+                <option value="C">Sector C</option>
+                <option value="D">Sector D</option>
+                <option value="E">Sector E</option>
+                <option value="F">Sector F</option>
+            </select>
+
+            <label for="power">Power Status</label>
+            <select id="power" name="power" required>
+                <option value="">Select power status</option>
+                <option value="stable">Stable</option>
+                <option value="flickering">Flickering</option>
+                <option value="outage">Power Outage</option>
+            </select>
+
+            <label for="water">Water Status</label>
+            <select id="water" name="water" required>
+                <option value="">Select water status</option>
+                <option value="safe">Normal</option>
+                <option value="unusual">Unusual Color or Smell</option>
+                <option value="unavailable">No Running Water</option>
+            </select>
+
+            <label for="safety">Personal Safety</label>
+            <select id="safety" name="safety" required>
+                <option value="">Select your status</option>
+                <option value="safe">I'm Safe</option>
+                <option value="assistance">Need Assistance</option>
+                <option value="emergency">Emergency</option>
+            </select>
+
+            <label for="notes">Additional Notes (Optional)</label>
+            <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                placeholder="Describe any unusual conditions..."
+            ></textarea>
+
+            <button type="submit" class="submit-btn">
+                Submit Check-In
+            </button>
+
+        </form>
+
+        <p id="checkin-message" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="checkin-info">
+        <h3>Scheduled Check-In Times</h3>
+
+        <div class="schedule-item">8:00 AM — Morning</div>
+        <div class="schedule-item">12:00 PM — Midday</div>
+        <div class="schedule-item">4:00 PM — Afternoon</div>
+        <div class="schedule-item">8:00 PM — Evening</div>
+
+        <p class="schedule-note">
+            Each scheduled check-in has a 30-minute window.
+        </p>
+
+        <h3>Why Check In?</h3>
+        <p>
+            Community participation helps Hollo OS identify
+            unusual changes in activity across sectors.
+        </p>
+    </div>
+
+</section>
+
+<script src="{% static 'js/checkin.js' %}"></script>
+
+{% endblock %}

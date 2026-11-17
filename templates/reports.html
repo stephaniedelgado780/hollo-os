@@ -1,0 +1,90 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Hazard Reports | Hollo OS{% endblock %}
+
+{% block content %}
+
+<section class="welcome">
+    <h2>Community Hazard Reports</h2>
+    <p>
+        Report unusual conditions or safety concerns
+        in your sector at any time.
+    </p>
+</section>
+
+<section class="reports-layout">
+
+    <div class="report-card">
+        <h3>Submit a Hazard Report</h3>
+
+        <form id="report-form">
+
+            <label for="report-sector">Your Sector</label>
+            <select id="report-sector" required>
+                <option value="">Select your sector</option>
+                <option value="A">Sector A</option>
+                <option value="B">Sector B</option>
+                <option value="C">Sector C</option>
+                <option value="D">Sector D</option>
+                <option value="E">Sector E</option>
+                <option value="F">Sector F</option>
+            </select>
+
+            <label for="hazard-type">Hazard Type</label>
+            <select id="hazard-type" required>
+                <option value="">Select a hazard</option>
+                <option value="Power Outage">Power Outage</option>
+                <option value="Water Contamination">Water Contamination</option>
+                <option value="Air Quality">Air Quality</option>
+                <option value="Structural Damage">Structural Damage</option>
+                <option value="Food Shortage">Food Shortage</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="severity">Severity Level</label>
+            <select id="severity" required>
+                <option value="">Select severity</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+                <option value="Critical">Critical</option>
+            </select>
+
+            <label for="report-description">Description</label>
+            <textarea
+                id="report-description"
+                rows="5"
+                maxlength="1000"
+                placeholder="Describe the hazard and where it occurred..."
+                required
+            ></textarea>
+
+            <button type="submit" class="submit-btn">
+                Submit Hazard Report
+            </button>
+
+        </form>
+
+        <p id="report-message" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="recent-reports">
+        <h3>Recent Community Reports</h3>
+
+        <div id="reports-list">
+            <!-- Reports will be displayed here -->
+        </div>
+
+        <p class="schedule-note">
+            Reports shown are demonstration data until
+            backend integration is complete.
+        </p>
+    </div>
+
+</section>
+
+<script src="{% static 'js/reports.js' %}"></script>
+
+{% endblock %}
