@@ -332,3 +332,361 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* =========================================
+   HOLLO OS - ENHANCED DASHBOARD
+   ========================================= */
+
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 35px;
+}
+
+.dashboard-section {
+    min-width: 0;
+}
+
+.dashboard-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.dashboard-heading h2 {
+    margin: 0;
+    color: #e6f4ef;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.demo-label {
+    color: #9caeb0;
+    border: 1px solid #43535a;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.dashboard-link {
+    color: #8cdbba;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.dashboard-link:hover {
+    text-decoration: underline;
+}
+
+/* CITY OVERVIEW */
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.overview-card {
+    background: #192830;
+    border: 1px solid #30434a;
+    border-radius: 12px;
+    padding: 20px;
+    min-width: 0;
+}
+
+.overview-icon {
+    display: block;
+    color: #8cdbba;
+    font-size: 23px;
+    margin-bottom: 12px;
+}
+
+.overview-card h3 {
+    color: #b6c6c8;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0 0 10px;
+}
+
+.overview-value {
+    color: #e6f4ef;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.overview-value.status-good {
+    color: #8cdbba;
+}
+
+.overview-value.status-warning {
+    color: #f0c26a;
+}
+
+.overview-description {
+    color: #8fa2a7;
+    font-size: 12px;
+}
+
+/* SHARED DASHBOARD PANELS */
+
+.dashboard-panel {
+    background: #17252d;
+    border: 1px solid #30434a;
+    border-radius: 12px;
+    padding: 22px;
+}
+
+/* SECTOR STATUS */
+
+.dashboard-sector-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.dashboard-sector-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #1e3038;
+    border: 1px solid #344850;
+    border-radius: 9px;
+    padding: 17px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.dashboard-sector-card:hover {
+    border-color: #8cdbba;
+    transform: translateY(-2px);
+}
+
+.dashboard-sector-name {
+    color: #e6f4ef;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dashboard-sector-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dashboard-status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.dashboard-sector-status.safe {
+    color: #8cdbba;
+}
+
+.dashboard-sector-status.warning {
+    color: #f0c26a;
+}
+
+.dashboard-sector-status.hazard {
+    color: #f08080;
+}
+
+.dashboard-sector-status.unknown {
+    color: #9aa8ad;
+}
+
+/* ACTIVITY + PARTICIPATION */
+
+.dashboard-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.dashboard-two-column > .dashboard-panel {
+    min-width: 0;
+}
+
+.dashboard-activity-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-activity-item {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+    padding: 13px 0;
+    border-bottom: 1px solid #30434a;
+}
+
+.dashboard-activity-item:last-child {
+    border-bottom: none;
+}
+
+.dashboard-activity-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #28443e;
+    color: #8cdbba;
+    font-size: 16px;
+}
+
+.dashboard-activity-text {
+    min-width: 0;
+}
+
+.dashboard-activity-text strong {
+    display: block;
+    color: #e6f4ef;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.dashboard-activity-text p {
+    color: #b4c3c5;
+    font-size: 12px;
+    margin: 0 0 5px;
+}
+
+.dashboard-activity-text span {
+    color: #8fa2a7;
+    font-size: 11px;
+}
+
+.participation-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 25px 0;
+}
+
+.participation-ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+    background: conic-gradient(#8cdbba 0%, #34464b 0%);
+}
+
+.participation-ring-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 117px;
+    height: 117px;
+    border-radius: 50%;
+    background: #17252d;
+}
+
+.participation-ring-center strong {
+    color: #e6f4ef;
+    font-size: 29px;
+}
+
+.participation-ring-center span {
+    color: #9caeb0;
+    font-size: 12px;
+}
+
+.participation-details p {
+    color: #e6f4ef;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+
+.participation-details span {
+    color: #9caeb0;
+    font-size: 12px;
+}
+
+/* ACTIVE ALERTS */
+
+.dashboard-alert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dashboard-alert-item {
+    padding: 16px 18px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    background: #213038;
+}
+
+.dashboard-alert-item.warning {
+    border-left-color: #f0c26a;
+}
+
+.dashboard-alert-item.hazard {
+    border-left-color: #f08080;
+}
+
+.dashboard-alert-item strong {
+    display: block;
+    color: #e6f4ef;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.dashboard-alert-item p {
+    color: #b4c3c5;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media (max-width: 900px) {
+    .overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-two-column {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .overview-grid,
+    .dashboard-sector-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-panel {
+        padding: 16px;
+    }
+
+    .participation-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 18px;
+    }
+
+    .dashboard-heading h2 {
+        font-size: 18px;
+    }
+}
