@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Community Guide | Hollo OS{% endblock %}
+
+{% block content %}
+<section class="dashboard-section dashboard-panel">
+    <h2>Community Guide</h2>
+
+    <h3>Sector C · Water Quality Warning</h3>
+    <p>Residents have reported unusual water color in Sector C.</p>
+    <p><strong>What to do:</strong> Use bottled water for drinking and cooking until officials confirm the tap water is safe.</p>
+
+    <h3>Sector E · Power Instability</h3>
+    <p>Residents have reported power outages in several buildings.</p>
+    <p><strong>What to do:</strong> If the lights go out, use a flashlight or a battery-powered lantern.</p>
+
+    <a href="{% url 'map' %}">View Sector Map</a>
+
+    <h3>Sector Guide</h3>
+    <p>Sector conditions in the current demo scenario:</p>
+
+    <ul>
+        <li><strong>Sector A — Safe.</strong> No active warnings.</li>
+        <li><strong>Sector B — Safe.</strong> No active warnings.</li>
+        <li><strong>Sector C — Warning.</strong> Residents reported an unusual water color.</li>
+        <li><strong>Sector D — Safe.</strong> No active warnings.</li>
+        <li><strong>Sector E — Hazard.</strong> Residents reported power outages in several buildings.</li>
+        <li><strong>Sector F — Unknown.</strong> There is too little information to assess this sector.</li>
+    </ul>
+
+    <h3>Resident Guidance</h3>
+    <ul>
+        <li>
+            <strong>Daily check-in:</strong>
+            Share the current power, water, and safety conditions in your sector.
+            <a href="{% url 'checkin' %}">Complete your daily check-in</a>
+        </li>
+        <li>
+            <strong>Report a new hazard:</strong>
+            If you notice a problem, select your sector and describe what you observed.
+            <a href="{% url 'reports' %}">Report a hazard</a>
+        </li>
+    </ul>
+
+</section>
+{% endblock %}
