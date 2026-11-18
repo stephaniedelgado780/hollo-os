@@ -45,4 +45,3 @@ class Hazard_Report(models.Model):
 
     def __str__(self):
         return f"Hazard Report {self.hazard_type} by {self.resident}"
-
