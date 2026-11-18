@@ -35,7 +35,6 @@ checkin_add = make_add_view(CheckinForm, "Check-in_List", "Add Check-in")
 
 hazard_report_add = make_add_view(HazardReportForm, "Hazard_Add", "Add Hazard Report")
 hazard_report_list_view = make_list_view(Hazard_Report, "Hazard_List", "Hazard Report List")
-<<<<<<< HEAD
 
 def sector_api(request):
     if request.method != "GET":
@@ -56,5 +55,3 @@ def sector_api(request):
     )
     
     return JsonResponse({"sectors": sectors})
-=======
->>>>>>> origin/main
