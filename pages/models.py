@@ -8,8 +8,8 @@ class Sector(models.Model):
     water = models.CharField(max_length=100)
     alert = models.CharField(max_length=100)
 
-def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
 
 class Resident(models.Model):
     id = models.AutoField(primary_key=True)
@@ -18,8 +18,8 @@ class Resident(models.Model):
     mood = models.DecimalField(max_digits=2, decimal_places=1)
     health = models.CharField(max_length=100)
 
-def __str__(self):
-    return self.username
+    def __str__(self):
+        return self.username
 
 class Checkin(models.Model):
     id = models.AutoField(primary_key=True)
@@ -31,8 +31,8 @@ class Checkin(models.Model):
     notes = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-    return f"Check-in {self.id} by {self.resident}"
+    def __str__(self):
+        return f"Check-in {self.id} by {self.resident}"
 
 class Hazard_Report(models.Model):
     id = models.AutoField(primary_key=True)
