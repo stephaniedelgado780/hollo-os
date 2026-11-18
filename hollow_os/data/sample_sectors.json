@@ -1,0 +1,10 @@
+{
+  "sectors": [
+    {"name": "A", "status": "Safe",    "power": 95,   "water": "Safe",                    "alert": "No active warnings."},
+    {"name": "B", "status": "Safe",    "power": 90,   "water": "Safe",                    "alert": "No active warnings."},
+    {"name": "C", "status": "Warning", "power": 72,   "water": "Potential contamination", "alert": "Residents reported unusual water conditions."},
+    {"name": "D", "status": "Safe",    "power": 88,   "water": "Safe",                    "alert": "No active warnings."},
+    {"name": "E", "status": "Hazard",  "power": 35,   "water": "Unsafe",                  "alert": "Critical power instability detected."},
+    {"name": "F", "status": "Unknown", "power": null, "water": "Unknown",                 "alert": "Insufficient monitoring data."}
+  ]
+}
