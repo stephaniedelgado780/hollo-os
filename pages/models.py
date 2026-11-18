@@ -7,6 +7,7 @@ class Sector(models.Model):
     power = models.DecimalField(max_digits=5, decimal_places=2)
     water = models.CharField(max_length=100)
     alert = models.CharField(max_length=100)
+
     def __str__(self):
         return self.name
 
@@ -16,6 +17,7 @@ class Resident(models.Model):
     sector = models.ForeignKey('Sector', on_delete=models.CASCADE)
     mood = models.DecimalField(max_digits=2, decimal_places=1)
     health = models.CharField(max_length=100)
+
     def __str__(self):
         return self.username
 
@@ -28,6 +30,7 @@ class Checkin(models.Model):
     safety = models.CharField(max_length=100)
     notes = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return f"Check-in {self.id} by {self.resident}"
 
