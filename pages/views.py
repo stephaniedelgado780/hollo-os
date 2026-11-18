@@ -8,10 +8,10 @@ def make_add_view(form_class, list_name, title):
             form = form_class(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('list_name')
+                return redirect(list_name)
         else:
             form = form_class()
-        return render(request, 'pages/add.html', {'form': form}, {"title": title})
+        return render(request, 'pages/add.html', {'form': form, "title": title})
     return view
 
 def make_list_view(model, add_name, title):
