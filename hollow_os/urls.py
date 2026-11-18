@@ -45,4 +45,10 @@ urlpatterns = [
         TemplateView.as_view(template_name="reports.html"),
         name="reports"
     ),
+
+    path(
+        "community/",
+        TemplateView.as_view(template_name="community.html"),
+        name="community"
+    ),
 ]

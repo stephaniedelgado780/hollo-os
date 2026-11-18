@@ -1,0 +1,40 @@
+{
+  "checkins": [
+    {
+      "resident": "demo_resident_a1",
+      "sector": "A",
+      "power": "Stable",
+      "water": "Normal",
+      "safety": "Safe",
+      "notes": "Power and water are working normally.",
+      "timestamp": "2026-11-18T08:00:00-05:00"
+    },
+    {
+      "resident": "demo_resident_c1",
+      "sector": "C",
+      "power": "Stable",
+      "water": "Unusual color",
+      "safety": "Concern",
+      "notes": "The tap water looked brown this morning.",
+      "timestamp": "2026-11-18T08:10:00-05:00"
+    }
+  ],
+  "hazard_reports": [
+    {
+      "resident": "demo_resident_c1",
+      "sector": "C",
+      "hazard_type": "Water Contamination",
+      "severity": "High",
+      "description": "Brown water came from two taps in the same building. The cause is unknown.",
+      "timestamp": "2026-11-18T08:15:00-05:00"
+    },
+    {
+      "resident": "demo_resident_e1",
+      "sector": "E",
+      "hazard_type": "Power Outage",
+      "severity": "Critical",
+      "description": "The lights went out in two buildings in Sector E.",
+      "timestamp": "2026-11-18T08:20:00-05:00"
+    }
+  ]
+}
