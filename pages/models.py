@@ -4,9 +4,12 @@ class Sector(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
-    power = models.DecimalField(max_digits=3, decimal_places=2)
+    power = models.DecimalField(max_digits=5, decimal_places=2)
     water = models.CharField(max_length=100)
     alert = models.CharField(max_length=100)
+
+def __str__(self):
+    return self.name
 
 class Resident(models.Model):
     id = models.AutoField(primary_key=True)
@@ -15,15 +18,21 @@ class Resident(models.Model):
     mood = models.DecimalField(max_digits=2, decimal_places=1)
     health = models.CharField(max_length=100)
 
+def __str__(self):
+    return self.username
+
 class Checkin(models.Model):
     id = models.AutoField(primary_key=True)
     resident = models.ForeignKey('Resident', on_delete=models.CASCADE)
     sector = models.ForeignKey('Sector', on_delete=models.CASCADE)
     power = models.CharField(max_length=100)
     water = models.CharField(max_length=100)
-    saftey = models.CharField(max_length=100)
+    safety = models.CharField(max_length=100)
     notes = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+def __str__(self):
+    return f"Check-in {self.id} by {self.resident}"
 
 class Hazard_Report(models.Model):
     id = models.AutoField(primary_key=True)
@@ -34,6 +43,6 @@ class Hazard_Report(models.Model):
     description = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
-        return self.title
-# Create your models here.
+    def __str__(self):
+        return f"Hazard Report {self.hazard_type} by {self.resident}"
+
