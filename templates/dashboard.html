@@ -1,46 +1,109 @@
 
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Dashboard | Hollo OS{% endblock %}
 
 {% block content %}
+<div class="dashboard-page">
 
-<section class="welcome">
-    <h2>City Overview</h2>
-    <p>Monitor environmental conditions across the Hollow.</p>
-</section>
+    <!-- CITY OVERVIEW -->
+    <section class="dashboard-section">
+        <div class="dashboard-heading">
+            <h2>City Overview</h2>
+            <span class="demo-label">Demo Data</span>
+        </div>
 
-<section class="stats">
+        <div class="overview-grid">
+            <div class="overview-card">
+                <span class="overview-icon">◉</span>
+                <h3>Air Quality</h3>
+                <p class="overview-value status-good">GOOD</p>
+                <span class="overview-description">Air conditions stable</span>
+            </div>
 
-    <div class="stat-card">
-        <h3>Air Quality</h3>
-        <p class="safe">GOOD</p>
+            <div class="overview-card">
+                <span class="overview-icon">◈</span>
+                <h3>Water Quality</h3>
+                <p class="overview-value status-warning">WARNING</p>
+                <span class="overview-description">Contamination reported</span>
+            </div>
+
+            <div class="overview-card">
+                <span class="overview-icon">ϟ</span>
+                <h3>Power Supply</h3>
+                <p class="overview-value">85%</p>
+                <span class="overview-description">Current supply level</span>
+            </div>
+
+            <div class="overview-card">
+                <span class="overview-icon">☼</span>
+                <h3>Temperature</h3>
+                <p class="overview-value">72°F</p>
+                <span class="overview-description">Average temperature</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTOR STATUS -->
+    <section class="dashboard-section dashboard-panel">
+        <div class="dashboard-heading">
+            <h2>Sector Status</h2>
+            <a href="/map/" class="dashboard-link">View Sector Map →</a>
+        </div>
+
+        <div id="dashboard-sectors" class="dashboard-sector-grid">
+            <!-- Populated by dashboard.js -->
+        </div>
+    </section>
+
+    <!-- COMMUNITY ACTIVITY + PARTICIPATION -->
+    <div class="dashboard-two-column">
+
+        <section class="dashboard-section dashboard-panel">
+            <div class="dashboard-heading">
+                <h2>Community Activity</h2>
+            </div>
+
+            <div id="dashboard-activity" class="dashboard-activity-list">
+                <!-- Populated by dashboard.js -->
+            </div>
+        </section>
+
+        <section class="dashboard-section dashboard-panel">
+            <div class="dashboard-heading">
+                <h2>Check-In Participation</h2>
+            </div>
+
+            <div class="participation-content">
+                <div id="participation-ring" class="participation-ring">
+                    <div class="participation-ring-center">
+                        <strong id="participation-percent">0%</strong>
+                        <span>Completed</span>
+                    </div>
+                </div>
+
+                <div class="participation-details">
+                    <p id="participation-count">0 / 0 residents</p>
+                    <span>Daily check-ins completed</span>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="stat-card">
-        <h3>Water Quality</h3>
-        <p class="warning">WARNING</p>
-    </div>
+    <!-- ACTIVE ALERTS -->
+    <section class="dashboard-section dashboard-panel">
+        <div class="dashboard-heading">
+            <h2>Active Alerts</h2>
+            <a href="/reports/" class="dashboard-link">Report Hazard →</a>
+        </div>
 
-    <div class="stat-card">
-        <h3>Power Supply</h3>
-        <p>85%</p>
-    </div>
+        <div id="dashboard-alerts" class="dashboard-alert-list">
+            <!-- Populated by dashboard.js -->
+        </div>
+    </section>
 
-    <div class="stat-card">
-        <h3>Temperature</h3>
-        <p>72°F</p>
-    </div>
+</div>
 
-</section>
-
-<section class="alerts">
-    <h2>Active Alerts</h2>
-
-    <div class="alert-card">
-        <h3>Sector C — Water Warning</h3>
-        <p>Possible contamination reported by residents.</p>
-    </div>
-</section>
-
+<script src="{% static 'js/dashboard.js' %}"></script>
 {% endblock %}
