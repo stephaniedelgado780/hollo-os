@@ -2,28 +2,104 @@
 const checkinForm = document.getElementById("checkin-form");
 const checkinMessage = document.getElementById("checkin-message");
 
-checkinForm.addEventListener("submit", function(event) {
+const DEMO_USERNAME = "demo_resident_a1";
+
+
+// Load JSON data from Django
+async function getApiData(url) {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error("Failed to retrieve data from " + url);
+    }
+
+    return await response.json();
+}
+
+
+// Submit a check-in to Django
+checkinForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const sector = document.getElementById("sector").value;
-    const power = document.getElementById("power").value;
-    const water = document.getElementById("water").value;
-    const safety = document.getElementById("safety").value;
-    const notes = document.getElementById("notes").value;
+    const submitButton = checkinForm.querySelector(
+        'button[type="submit"]'
+    );
 
-    const checkinData = {
-        sector: sector,
-        power: power,
-        water: water,
-        safety: safety,
-        notes: notes
-    };
+    submitButton.disabled = true;
+    checkinMessage.textContent = "Submitting your check-in...";
 
-    console.log("Demo check-in:", checkinData);
+    try {
+        const sectorName = document.getElementById("sector").value;
+        const power = document.getElementById("power").value;
+        const water = document.getElementById("water").value;
+        const safety = document.getElementById("safety").value;
+        const notes = document.getElementById("notes").value;
 
-    checkinMessage.textContent =
-        `Demo check-in recorded for Sector ${sector}. ` +
-        "Backend submission is not connected yet.";
+        // Retrieve the sectors and residents from Django
+        const [sectors, residents] = await Promise.all([
+            getApiData("/api/sectors/"),
+            getApiData("/api/residents/")
+        ]);
 
-    checkinForm.reset();
+        // Find the database ID for the selected sector
+        const selectedSector = sectors.find(function(sector) {
+            return sector.name === sectorName;
+        });
+
+        if (!selectedSector) {
+            throw new Error("Selected sector was not found.");
+        }
+
+        // Find our temporary test resident
+        const resident = residents.find(function(person) {
+            return person.username === DEMO_USERNAME;
+        });
+
+        if (!resident) {
+            throw new Error(
+                "Demo resident was not found. Create the resident first."
+            );
+        }
+
+        // Match the fields expected by Ian's Django ModelForm
+        const checkinData = {
+            resident: resident.id,
+            sector: selectedSector.id,
+            power: power,
+            water: water,
+            safety: safety,
+            notes: notes
+        };
+
+        // Send the check-in to Django
+        const response = await fetch("/api/checkins/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(checkinData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            console.error("Django validation errors:", result);
+            throw new Error("Django could not save the check-in.");
+        }
+
+        console.log("Check-in saved to Django:", result);
+
+        checkinMessage.textContent =
+            `Check-in successfully submitted for Sector ${sectorName}!`;
+
+        checkinForm.reset();
+    }
+    catch (error) {
+        console.error("Check-in submission error:", error);
+        checkinMessage.textContent =
+            "Unable to submit check-in: " + error.message;
+    }
+    finally {
+        submitButton.disabled = false;
+    }
 });
