@@ -209,6 +209,159 @@ function displayAlerts() {
 }
 
 
+/* =========================================
+   CITY OVERVIEW
+   ========================================= */
+
+// Update City Overview using sector records from Django
+function displayCityOverview(sectors) {
+
+    const waterValue = document.getElementById("overview-water");
+    const waterDescription = document.getElementById(
+        "overview-water-description"
+    );
+
+    const powerValue = document.getElementById("overview-power");
+    const powerDescription = document.getElementById(
+        "overview-power-description"
+    );
+
+    const riskValue = document.getElementById("overview-risk");
+    const riskDescription = document.getElementById(
+        "overview-risk-description"
+    );
+
+    // WATER QUALITY
+    const unsafeSectors = sectors.filter(function(sector) {
+        const water = String(sector.water || "").toLowerCase();
+
+        return water.includes("unsafe") ||
+               water.includes("contamination") ||
+               water.includes("warning");
+    });
+
+    const knownWaterSectors = sectors.filter(function(sector) {
+        const water = String(sector.water || "").toLowerCase();
+
+        return water !== "" && water !== "unknown";
+    });
+
+    waterValue.classList.remove("status-good", "status-warning");
+
+    if (sectors.length === 0 || knownWaterSectors.length === 0) {
+        waterValue.textContent = "UNKNOWN";
+        waterDescription.textContent = "No water data available";
+    }
+    else if (unsafeSectors.length > 0) {
+        waterValue.textContent = "WARNING";
+        waterValue.classList.add("status-warning");
+
+        waterDescription.textContent =
+            unsafeSectors.length + " sector(s) reporting water concerns";
+    }
+    else if (knownWaterSectors.length < sectors.length) {
+        waterValue.textContent = "UNKNOWN";
+        waterDescription.textContent =
+            "Some sector water readings are unavailable";
+    }
+    else {
+        waterValue.textContent = "GOOD";
+        waterValue.classList.add("status-good");
+
+        waterDescription.textContent =
+            "All sectors report safe water conditions";
+    }
+
+
+    // AVERAGE POWER
+    // Exclude unknown sectors, including Sector F's placeholder 0
+    const knownPowerSectors = sectors.filter(function(sector) {
+        const power = Number(sector.power);
+
+        return sector.status.toLowerCase() !== "unknown" &&
+               sector.power !== null &&
+               sector.power !== "" &&
+               Number.isFinite(power) &&
+               power >= 0 &&
+               power <= 100;
+    });
+
+    if (knownPowerSectors.length === 0) {
+        powerValue.textContent = "N/A";
+        powerDescription.textContent = "No power readings available";
+    }
+    else {
+        const totalPower = knownPowerSectors.reduce(function(total, sector) {
+            return total + Number(sector.power);
+        }, 0);
+
+        const averagePower = Math.round(
+            totalPower / knownPowerSectors.length
+        );
+
+        powerValue.textContent = averagePower + "%";
+
+        powerDescription.textContent =
+            "Average across " + knownPowerSectors.length +
+            " reporting sectors";
+    }
+
+
+    // SECTORS AT RISK
+    const riskSectors = sectors.filter(function(sector) {
+        const status = sector.status.toLowerCase();
+
+        return status === "warning" || status === "hazard";
+    });
+
+    riskValue.textContent =
+        riskSectors.length + " / " + sectors.length;
+
+    riskDescription.textContent =
+        "Sectors with warning or hazard status";
+}
+
+
+/* =========================================
+   HAZARD REPORT COUNT
+   ========================================= */
+
+async function loadHazardCount() {
+    const hazardValue = document.getElementById("overview-hazards");
+
+    const hazardDescription = document.getElementById(
+        "overview-hazards-description"
+    );
+
+    try {
+        const response = await fetch("/api/hazards/");
+
+        if (!response.ok) {
+            throw new Error("Failed to retrieve hazard reports");
+        }
+
+        const hazards = await response.json();
+
+        if (!Array.isArray(hazards)) {
+            throw new Error("Unexpected hazard API response");
+        }
+
+        hazardValue.textContent = hazards.length;
+
+        hazardDescription.textContent =
+            "Total community hazard reports submitted";
+
+        console.log("Hazard count loaded from Django:", hazards.length);
+    }
+    catch (error) {
+        console.error("Error loading hazard count:", error);
+
+        hazardValue.textContent = "N/A";
+        hazardDescription.textContent =
+            "Unable to load hazard reports";
+    }
+}
+
 
 /* =========================================
    DJANGO API INTEGRATION
@@ -253,6 +406,7 @@ async function loadDashboardData() {
         // Refresh the dashboard using the latest database data
         displaySectors();
         displayAlerts();
+        displayCityOverview(sectors);
 
         console.log("Dashboard connected to Django API:", sectors);
     }
@@ -271,6 +425,19 @@ async function loadDashboardData() {
 
         document.getElementById("dashboard-alerts").textContent =
             "Unable to load current alerts.";
+
+        document.getElementById("overview-water").textContent = "N/A";
+        document.getElementById("overview-power").textContent = "N/A";
+        document.getElementById("overview-risk").textContent = "N/A";
+
+        document.getElementById("overview-water-description").textContent =
+            "Unable to load sector data";
+
+        document.getElementById("overview-power-description").textContent =
+            "Unable to load sector data";
+
+        document.getElementById("overview-risk-description").textContent =
+            "Unable to load sector data";
     }
 }
 
@@ -468,6 +635,7 @@ function initializeDashboard() {
     loadDashboardData();
     loadCommunityActivity();
     loadParticipation();
+    loadHazardCount();
 }
 
 

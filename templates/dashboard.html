@@ -7,43 +7,57 @@
 {% block content %}
 <div class="dashboard-page">
 
+
     <!-- CITY OVERVIEW -->
     <section class="dashboard-section">
         <div class="dashboard-heading">
             <h2>City Overview</h2>
-            <span class="demo-label">Demo Data</span>
+            <span class="demo-label">Database Data</span>
         </div>
 
         <div class="overview-grid">
             <div class="overview-card">
-                <span class="overview-icon">◉</span>
-                <h3>Air Quality</h3>
-                <p class="overview-value status-good">GOOD</p>
-                <span class="overview-description">Air conditions stable</span>
-            </div>
-
-            <div class="overview-card">
                 <span class="overview-icon">◈</span>
                 <h3>Water Quality</h3>
-                <p class="overview-value status-warning">WARNING</p>
-                <span class="overview-description">Contamination reported</span>
+                <p id="overview-water" class="overview-value">Loading...</p>
+                <span id="overview-water-description"
+                    class="overview-description">
+                    Checking sector water conditions
+                </span>
             </div>
 
             <div class="overview-card">
                 <span class="overview-icon">ϟ</span>
-                <h3>Power Supply</h3>
-                <p class="overview-value">85%</p>
-                <span class="overview-description">Current supply level</span>
+                <h3>Average Power</h3>
+                <p id="overview-power" class="overview-value">Loading...</p>
+                <span id="overview-power-description"
+                    class="overview-description">
+                    Calculating sector power levels
+                </span>
             </div>
 
             <div class="overview-card">
-                <span class="overview-icon">☼</span>
-                <h3>Temperature</h3>
-                <p class="overview-value">72°F</p>
-                <span class="overview-description">Average temperature</span>
+                <span class="overview-icon">!</span>
+                <h3>Sectors at Risk</h3>
+                <p id="overview-risk" class="overview-value">Loading...</p>
+                <span id="overview-risk-description"
+                    class="overview-description">
+                    Checking sector statuses
+                </span>
+            </div>
+
+            <div class="overview-card">
+                <span class="overview-icon">▤</span>
+                <h3>Hazard Reports</h3>
+                <p id="overview-hazards" class="overview-value">Loading...</p>
+                <span id="overview-hazards-description"
+                    class="overview-description">
+                    Counting submitted reports
+                </span>
             </div>
         </div>
     </section>
+
 
     <!-- SECTOR STATUS -->
     <section class="dashboard-section dashboard-panel">
