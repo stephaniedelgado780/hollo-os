@@ -80,7 +80,6 @@ const sectorButtons = document.querySelectorAll(".sector");
 // Display information for a selected sector
 function displaySector(sectorId) {
     const sector = sectors[sectorId];
-    document.getElementById("sector-route").textContent = getRouteAdvice(sectorId);
 
     if (!sector) {
         document.getElementById("sector-name").textContent =
@@ -100,6 +99,9 @@ function displaySector(sectorId) {
 
         return;
     }
+
+    //ensures sector data is not missing before calling route advice
+    document.getElementById("sector-route").textContent = getRouteAdvice(sectorId);
 
     document.getElementById("sector-name").textContent =
         `Sector ${sectorId}`;
