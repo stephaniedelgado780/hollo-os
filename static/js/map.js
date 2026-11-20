@@ -7,6 +7,72 @@
 // Store sector information returned by Django
 let sectors = {};
 
+// Passages connect neighbors horizontally and vertically on the sector map.
+const passages = {
+    A: ["B", "D"],
+    B: ["A", "C", "E"],
+    C: ["B", "F"],
+    D: ["A", "E"],
+    E: ["B", "D", "F"],
+    F: ["C", "E"]
+};
+
+function getPowerPercent(value) {
+    if (value == null || String(value).trim() === "") return null;
+
+    const power = Number(value);
+    return Number.isFinite(power) && power >= 0 && power <= 100 ? power : null;
+}
+
+function getRouteAdvice(start) {
+    const origin = sectors[start];
+    const status = origin?.status?.trim().toLowerCase();
+
+    if (status === "safe") return "This sector is marked safe.";
+    if (status !== "warning" && status !== "hazard") {
+        return "Routing unavailable until the sector status is known.";
+    }
+
+    const minimumPower = 80;
+    const needsWater = /unsafe|contaminat|warning/i.test(origin.water);
+    const originPower = getPowerPercent(origin.power);
+    const needsPower = originPower !== null && originPower < minimumPower;
+
+    // BFS checks routes with one passage first, then two, and so on.
+    const routes = [[start]];
+    const visited = new Set([start]);
+
+    for (let i = 0; i < routes.length; i++) {
+        const route = routes[i];
+        const current = route[route.length - 1];
+
+        for (const next of passages[current]) {
+            if (visited.has(next)) continue;
+            visited.add(next);
+
+            const sector = sectors[next];
+            if (sector?.status?.trim().toLowerCase() !== "safe") continue;
+
+            const nextRoute = [...route, next];
+            const hasSafeWater = sector.water?.trim().toLowerCase() === "safe";
+            const power = getPowerPercent(sector.power);
+            const hasEnoughPower = power !== null && power >= minimumPower;
+
+            if ((!needsWater || hasSafeWater) && (!needsPower || hasEnoughPower)) {
+                const reasons = ["marked safe"];
+                if (needsWater) reasons.push("water rated safe");
+                if (needsPower) reasons.push(`${power}% power`);
+
+                return `Recommended sector: ${next}. Route: ${nextRoute.join(" → ")}. Reason: ${reasons.join(", ")}.`;
+            }
+
+            routes.push(nextRoute);
+        }
+    }
+
+    return "No safe route available that meets this sector's needs.";
+}
+
 // Get all sector buttons
 const sectorButtons = document.querySelectorAll(".sector");
 
@@ -14,6 +80,7 @@ const sectorButtons = document.querySelectorAll(".sector");
 // Display information for a selected sector
 function displaySector(sectorId) {
     const sector = sectors[sectorId];
+    document.getElementById("sector-route").textContent = getRouteAdvice(sectorId);
 
     if (!sector) {
         document.getElementById("sector-name").textContent =
