@@ -2,7 +2,6 @@
 const checkinForm = document.getElementById("checkin-form");
 const checkinMessage = document.getElementById("checkin-message");
 
-const DEMO_USERNAME = "demo_resident_a1";
 
 
 // Load JSON data from Django
@@ -50,14 +49,14 @@ checkinForm.addEventListener("submit", async function(event) {
             throw new Error("Selected sector was not found.");
         }
 
-        // Find our temporary test resident
+        // Find a test resident who belongs to the selected sector
         const resident = residents.find(function(person) {
-            return person.username === DEMO_USERNAME;
+            return Number(person.sector_id) === Number(selectedSector.id);
         });
 
         if (!resident) {
             throw new Error(
-                "Demo resident was not found. Create the resident first."
+                `No test resident exists for Sector ${sectorName}.`
             );
         }
 
